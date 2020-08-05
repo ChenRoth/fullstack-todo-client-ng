@@ -9,6 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { IUserState, userReducer } from 'src/store/user';
+import { UserEffects } from 'src/actions/effects';
 
 export interface IState {
   user: IUserState;
@@ -24,7 +25,7 @@ export interface IState {
     HttpClientModule,
     StoreModule.forRoot<IState>({ user: userReducer }),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([UserEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
