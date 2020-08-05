@@ -4,10 +4,11 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from 'src/app/user.service';
 import { completeLogin, startLogin, startRegister } from './actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserEffects {
-    constructor(private actions$: Actions, private userService: UserService) { }
+    constructor(private actions$: Actions, private userService: UserService, private router: Router) { }
 
     login$ = createEffect(() =>
         this.actions$.pipe(
@@ -17,6 +18,7 @@ export class UserEffects {
                     .pipe(
                         map(({ token }) => {
                             localStorage.setItem('token', token);
+                            this.router.navigateByUrl('/todos');
                             return completeLogin({ username: action.username });
                         }),
                         catchError((error: Error) => {
@@ -35,6 +37,7 @@ export class UserEffects {
                     .pipe(
                         map(({ token }) => {
                             localStorage.setItem('token', token);
+                            this.router.navigateByUrl('/todos');
                             return completeLogin({ username: action.username });
                         }),
                         catchError((error: Error) => {
