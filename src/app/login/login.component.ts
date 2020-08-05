@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { startLogin } from 'src/actions/actions';
+import { startLogin } from 'src/store/actions/user.actions';
 import { IState } from '../app.module';
 
 @Component({

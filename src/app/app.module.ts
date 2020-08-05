@@ -10,14 +10,17 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { IUserState, userReducer } from 'src/store/user';
-import { UserEffects } from 'src/actions/effects';
+import { IUserState, userReducer } from 'src/store/reducers/user.reducer';
+import { UserEffects } from 'src/store/effects/user.effects';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TodosComponent } from './todos/todos.component';
+import { TodoEffects } from 'src/store/effects/todo.effects';
+import { ITodoState, todoReducer } from 'src/store/reducers/todo.reducer';
 
 export interface IState {
   user: IUserState;
+  todos: ITodoState;
 }
 
 @NgModule({
@@ -32,9 +35,9 @@ export interface IState {
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    StoreModule.forRoot<IState>({ user: userReducer }),
+    StoreModule.forRoot<IState>({ user: userReducer, todos: todoReducer }),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([UserEffects, TodoEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
