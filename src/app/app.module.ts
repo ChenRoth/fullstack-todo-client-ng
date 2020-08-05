@@ -7,8 +7,12 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-
 import { HttpClientModule } from '@angular/common/http';
+import { IUserState, userReducer } from 'src/store/user';
+
+export interface IState {
+  user: IUserState;
+}
 
 @NgModule({
   declarations: [
@@ -18,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot<IState>({ user: userReducer }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),
   ],
