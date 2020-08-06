@@ -1,5 +1,5 @@
 <div class="navbar">
     <div>Welcome {{ (user$ | async)?.username || 'Guest' }}!</div>
     <div [style.flex]="1" ></div>
-    <button *ngIf="(user$ | async).isLoggedIn">LOG OUT</button>
+    <button (click)="logout()" *ngIf="(user$ | async).isLoggedIn">LOG OUT</button>
 </div>

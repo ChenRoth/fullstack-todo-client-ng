@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { receiveTodos, fetchTodos, receiveCreatedTodo, deletedTodo, toggledTodo } from '../actions/todo.actions';
 import { ITodo } from '../../models/todo.model';
+import { logout } from '../actions/user.actions';
 
 export interface ITodoState {
     items: ITodo[];
@@ -28,5 +29,6 @@ export const todoReducer = createReducer(initialState,
             ...state,
             items,
         };
-    })
+    }),
+    on(logout, () => initialState),
 );

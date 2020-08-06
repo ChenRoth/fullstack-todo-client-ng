@@ -5,3 +5,6 @@ export const startRegister = createAction('REGISTER_PENDING', props<{ username: 
 export const startLogin = createAction('LOGIN_PENDING', props<{ username: string; password: string; }>());
 export const completeLogin = createAction('LOGIN_SUCCESS', props<{ username: string; }>());
 
+export const ping = createAction('PING');
+
+export const logout = createAction('LOGOUT');

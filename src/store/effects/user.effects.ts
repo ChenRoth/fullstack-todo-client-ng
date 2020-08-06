@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from 'src/app/user.service';
-import { completeLogin, startLogin, startRegister } from '../actions/user.actions';
+import { completeLogin, startLogin, startRegister, ping } from '../actions/user.actions';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -46,5 +46,22 @@ export class UserEffects {
                     )
             )
         )
-    )
+    );
+
+    ping$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ping),
+            mergeMap(() =>
+                this.userService.ping()
+                    .pipe(
+                        map(({ username }) => {
+                            return completeLogin({ username });
+                        }),
+                        catchError((error: Error) => {
+                            return of({ type: 'error' });
+                        })
+                    )
+            )
+        )
+    );
 }
