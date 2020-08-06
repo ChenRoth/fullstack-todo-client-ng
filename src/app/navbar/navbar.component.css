@@ -1,0 +1,6 @@
+.navbar {
+    display: flex;
+    padding: 8px;
+    background: lightblue;
+    margin-bottom: 8px;
+}

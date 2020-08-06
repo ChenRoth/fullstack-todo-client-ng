@@ -19,6 +19,7 @@ import { TodoEffects } from 'src/store/effects/todo.effects';
 import { ITodoState, todoReducer } from 'src/store/reducers/todo.reducer';
 import { CreateTodoComponent } from './create-todo/create-todo.component';
 import { TodoComponent } from './todo/todo.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export interface IState {
   user: IUserState;
@@ -32,7 +33,8 @@ export interface IState {
     RegisterComponent,
     TodosComponent,
     CreateTodoComponent,
-    TodoComponent
+    TodoComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

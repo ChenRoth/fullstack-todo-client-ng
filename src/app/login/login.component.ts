@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { startLogin } from 'src/store/actions/user.actions';
 import { IState } from '../app.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { IState } from '../app.module';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private store: Store<IState>) {   }
+  constructor(private fb: FormBuilder, private store: Store<IState>, private router: Router) {   }
 
   form = this.fb.group({
     username: this.fb.control('', [Validators.required]),
@@ -26,5 +27,9 @@ export class LoginComponent implements OnInit {
   login() {
     const { username, password } = this.form.value;
     this.store.dispatch(startLogin({username, password}));
+  }
+
+  goToRegister() {
+    this.router.navigateByUrl('/register');
   }
 }

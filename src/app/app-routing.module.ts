@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TodosComponent } from './todos/todos.component';
+import { PrivateRoute } from './privateRoute';
 
 
 const routes: Routes = [
@@ -13,7 +14,7 @@ const routes: Routes = [
     path: 'register', component: RegisterComponent,
   },
   {
-    path: 'todos', component: TodosComponent,
+    path: 'todos', component: TodosComponent, canActivate: [PrivateRoute]
   }
 ];
 
