@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { TodoService } from 'src/app/todo.service';
-import { fetchTodos, receiveTodos, createTodo, receiveCreatedTodo } from '../actions/todo.actions';
+import { fetchTodos, receiveTodos, createTodo, receiveCreatedTodo, deleteTodo, deletedTodo, toggleTodo, toggledTodo } from '../actions/todo.actions';
 
 @Injectable()
 export class TodoEffects {
@@ -41,5 +41,39 @@ export class TodoEffects {
                     )
             )
         )
-    )
+    );
+
+    deleteTodo$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(deleteTodo),
+            mergeMap(action =>
+                this.todoService.deleteTodo(action.todoId)
+                    .pipe(
+                        map(() => {
+                            return deletedTodo({ todoId: action.todoId });
+                        }),
+                        catchError((error: Error) => {
+                            return of({ type: 'error' });
+                        })
+                    )
+            )
+        )
+    );
+
+    toggleTodo$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(toggleTodo),
+            mergeMap(action =>
+                this.todoService.toggleTodo(action.todoId)
+                    .pipe(
+                        map(() => {
+                            return toggledTodo({ todoId: action.todoId });
+                        }),
+                        catchError((error: Error) => {
+                            return of({ type: 'error' });
+                        })
+                    )
+            )
+        )
+    );
 }

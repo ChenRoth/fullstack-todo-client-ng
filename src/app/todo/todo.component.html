@@ -1,0 +1,10 @@
+<div *ngIf="item$ | async as item" class="todo">
+    <button class="delete-btn" (click)="delete()">X</button>
+    <p>
+        {{ item.description}}
+    </p>
+
+    <span>{{ item.date}}</span>
+
+    <input type="checkbox" [checked]="item.isComplete" (change)="toggle()" />
+</div>

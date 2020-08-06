@@ -1,11 +1,6 @@
 <h1>TODOS</h1>
 <app-create-todo></app-create-todo>
 
-<div>
-    <ul>
-        <li *ngFor="let todo of todos$ | async">
-            {{ todo.description }}
-            {{ todo.date }}
-        </li>
-    </ul>
+<div class="todo-list">
+    <app-todo *ngFor="let todo of todos$ | async" [id]="todo._id"></app-todo>
 </div>

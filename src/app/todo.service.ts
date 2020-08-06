@@ -33,4 +33,20 @@ export class TodoService {
         headers: this.getHeaders(),
       }).pipe(map(({ todo }) => todo));
   }
+
+  deleteTodo(todoId: string): Observable<string> {
+    return this.http.delete(`${TODO_API_URL}/${todoId}`,
+      {
+        headers: this.getHeaders(),
+        responseType: 'text',
+      });
+  }
+
+  toggleTodo(todoId: string): Observable<string> {
+    return this.http.put(`${TODO_API_URL}/${todoId}/toggle`, { /* empty body */ },
+    {
+      headers: this.getHeaders(),
+      responseType: 'text',
+    });
+  }
 }
