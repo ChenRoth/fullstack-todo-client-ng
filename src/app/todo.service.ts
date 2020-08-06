@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ITodo } from 'src/models/todo.model';
+import { map } from 'rxjs/operators';
 
 const TODO_API_URL = 'http://localhost:4000/todos';
 
@@ -23,5 +25,12 @@ export class TodoService {
     return this.http.get<ITodo[]>(TODO_API_URL, {
       headers: this.getHeaders(),
     });
+  }
+
+  createTodo(details: Omit<ITodo, '_id' | 'isComplete'>): Observable<ITodo> {
+    return this.http.post<{ todo: ITodo }>(TODO_API_URL, details,
+      {
+        headers: this.getHeaders(),
+      }).pipe(map(({ todo }) => todo));
   }
 }

@@ -1,4 +1,4 @@
-interface ITodo {
+export interface ITodo {
     description: string;
     date: Date;
     isComplete: boolean;

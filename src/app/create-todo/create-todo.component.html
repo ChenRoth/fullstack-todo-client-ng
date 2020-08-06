@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="create()">
+    <label>
+        Description:
+        <input type="text" formControlName="description">
+      </label>
+    
+      <label>
+        Due Date:
+        <input type="datetime-local" formControlName="date">
+      </label>
+      
+      <button type="submit" [disabled]="!form.valid">CREATE</button>
+</form>
