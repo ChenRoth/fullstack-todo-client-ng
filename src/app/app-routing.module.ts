@@ -15,6 +15,9 @@ const routes: Routes = [
   },
   {
     path: 'todos', component: TodosComponent, canActivate: [PrivateRoute]
+  },
+  {
+    path: '**', redirectTo: 'todos'
   }
 ];
 
